@@ -10,15 +10,18 @@
     <artifactId>rjar</artifactId>
     <name>rjar</name>
     <packaging>jar</packaging>
-    <version>0.6.1</version>
+    <version>0.6.2</version>
     <properties>
-        <groovyVersion>2.4.1</groovyVersion>
+        <groovyVersion>3.0.7</groovyVersion>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <version>${groovyVersion}</version>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -32,7 +35,7 @@
             <!--
                 Use Groovy plugin for compilation of .groovy files
             -->
-            <plugin>
+            <!--plugin>
                 <groupId>org.codehaus.gmaven</groupId>
                 <artifactId>gmaven-plugin</artifactId>
                 <version>1.5</version>
@@ -55,6 +58,35 @@
                         <groupId>org.codehaus.groovy</groupId>
                         <artifactId>groovy-all</artifactId>
                         <version>${groovyVersion}</version>
+                    </dependency>
+                </dependencies>
+            </plugin-->
+
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>1.12.1</version>
+                <configuration>
+                    <providerSelection>2.0</providerSelection>
+                    <sourceEncoding>UTF-8</sourceEncoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generateStubs</goal>
+                            <goal>compile</goal>
+                            <goal>generateTestStubs</goal>
+                            <goal>compileTests</goal>
+                        </goals>
+                    </execution>
+                </executions>                
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>${groovyVersion}</version>
+                        <type>pom</type>
+                        <scope>runtime</scope>
                     </dependency>
                 </dependencies>
             </plugin>
